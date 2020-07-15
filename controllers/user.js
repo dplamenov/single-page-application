@@ -13,7 +13,7 @@ export default {
                 this.partial('../views/user/login.hbs');
             });
         },
-        logout() {
+        logout(context) {
             extend(context).then(function () {
                 const token = localStorage.getItem('user-token');
                 user.logout(token).then((response) => {
@@ -30,7 +30,11 @@ export default {
 
             const username = data.username;
             const password = data.password;
-            const rePassword = data.rePassword; //todo validation
+            const rePassword = data.rePassword;
+
+            if(password !== rePassword){
+                return;
+            }
 
             user.register(username, password).then((response) => {
                 context.redirect('#/user/login');

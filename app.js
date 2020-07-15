@@ -14,6 +14,8 @@ const app = new Sammy('#root', function () {
     this.post('#/user/login', controllers.user.post.login);
     this.get('#/user/logout', controllers.user.get.logout);
 
+    this.get('#/object/create', controllers.object.get.create);
+    this.post('#/object/create', controllers.object.post.create);
 });
 
 
