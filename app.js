@@ -16,6 +16,10 @@ const app = new Sammy('#root', function () {
 
     this.get('#/object/create', controllers.object.get.create);
     this.post('#/object/create', controllers.object.post.create);
+
+    this.get('#/object/all',  controllers.object.get.all);
+    this.get('#/object/details/:id', controllers.object.get.details);
+
 });
 
 
