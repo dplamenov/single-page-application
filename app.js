@@ -19,7 +19,7 @@ const app = new Sammy('#root', function () {
 
     this.get('#/object/all',  controllers.object.get.all);
     this.get('#/object/details/:id', controllers.object.get.details);
-
+    this.get('#/object/delete/:id', controllers.object.delete.delete);
 });
 
 

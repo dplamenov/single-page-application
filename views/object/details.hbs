@@ -1,0 +1,16 @@
+{{>header}}
+<div style="margin: 7% auto;" class="modal-content col-lg-6">
+    <div class="modal-body">
+
+        <p>Food id: {{data.objectId}}</p>
+        <p>Food name: {{data.foodName}}</p>
+        <p>Calories: {{data.calories}}</p>
+
+        <p>Is you owner: {{isOwner}}</p>
+
+        <img src="{{data.picture}}" alt="" style="width: 90%">
+        <a href="#/object/delete/{{data.objectId}}">Delete</a>
+    </div>
+</div>
+
+{{>footer}}

@@ -24,17 +24,14 @@ export default {
 
         details(context) {
             const {id} = context.params;
-            console.log(id);
 
             extend(context).then(function () {
                 object.getById(id).then(resultObject => {
                     context.data = resultObject;
                     context.isOwner = resultObject.ownerId === localStorage.getItem('user-id');
 
-
-                    this.partial('../views/cause/details.hbs');
+                    this.partial('../views/object/details.hbs');
                 });
-
             });
         }
     },
@@ -45,6 +42,18 @@ export default {
                 const data = {...context.params};
                 object.create(data).then(function () {
                     context.redirect('#/home');
+                });
+            });
+        }
+    },
+
+    delete: {
+        delete(context) {
+            extend(context).then(function () {
+                const {id} = context.params;
+
+                object.delete(id).then(() => {
+                    context.redirect('#/object/all');
                 });
             });
         }
