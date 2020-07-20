@@ -15,9 +15,9 @@ export default {
         },
         logout(context) {
             extend(context).then(function () {
-                const token = localStorage.getItem('user-token');
+                const token = sessionStorage.getItem('user-token');
                 user.logout(token).then((response) => {
-                    localStorage.clear();
+                    sessionStorage.clear();
                     context.redirect('#/home');
                 });
             });
@@ -28,16 +28,20 @@ export default {
         register(context) {
             const data = {...context.params};
 
+            console.log(context.params);
+
             const username = data.username;
             const password = data.password;
-            const rePassword = data.rePassword;
+            const rePassword = data.repeatPassword;
 
             if(password !== rePassword){
                 return;
             }
 
             user.register(username, password).then((response) => {
-                context.redirect('#/user/login');
+                console.log(this);
+                this.login(context);
+                // context.redirect('#/home');
             });
         },
         login(context) {
@@ -55,9 +59,9 @@ export default {
                 })
                 .then((response) => {
                     console.log(response);
-                    localStorage.setItem('user-token', response['user-token']);
-                    localStorage.setItem('user', JSON.stringify(response));
-                    localStorage.setItem('user-id', response.objectId);
+                    sessionStorage.setItem('user-token', response['user-token']);
+                    sessionStorage.setItem('user', JSON.stringify(response));
+                    sessionStorage.setItem('user-id', response.objectId);
                     context.redirect('#/home');
                 }).catch(error => {
                 console.error(error);

@@ -3,7 +3,7 @@ import object from "../models/object.js";
 
 export default {
     get: {
-        create(context) {
+        create(context) { //show create form
             extend(context).then(function () {
                 this.partial("../views/object/create.hbs");
             });
@@ -12,7 +12,6 @@ export default {
             context.data = [];
             extend(context).then(function () {
                 object.getAll().then((data) => {
-                    console.log(data);
                     data.forEach(singleObject => {
                         context.data.push(singleObject);
                     });
@@ -22,7 +21,7 @@ export default {
             });
         },
 
-        details(context) {
+        edit(context) {
             const {id} = context.params;
 
             extend(context).then(function () {
@@ -30,7 +29,25 @@ export default {
                     context.data = resultObject;
                     context.isOwner = resultObject.ownerId === localStorage.getItem('user-id');
 
-                    this.partial('../views/object/details.hbs');
+                    object.getAllObjectByOwner(context.userId).then(data => {
+                        context.posts = data;
+                        this.partial('../views/object/edit.hbs');
+                    });
+                });
+            });
+
+        },
+        details(context) {
+            const {id} = context.params;
+
+            extend(context).then(function () {
+                object.getById(id).then(resultObject => {
+                    context.data = resultObject;
+
+                    object.getAllObjectByOwner(context.userId).then(data => {
+                        context.posts = data;
+                        this.partial('../views/object/details.hbs');
+                    });
                 });
             });
         }
@@ -51,12 +68,22 @@ export default {
         delete(context) {
             extend(context).then(function () {
                 const {id} = context.params;
-
                 object.delete(id).then(() => {
-                    context.redirect('#/object/all');
+                    context.redirect('#/home');
                 });
             });
         }
-    }
+    },
 
+    put: {
+        update(context) {
+            extend(context).then(function () {
+                const {id, title, category, content} = context.params;
+                object.updatePartially(id, {title, category, content})
+                    .then(() => {
+                        context.redirect('#/home');
+                    });
+            });
+        }
+    }
 }

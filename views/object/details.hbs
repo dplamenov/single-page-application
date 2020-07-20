@@ -1,16 +1,19 @@
-{{>header}}
-<div style="margin: 7% auto;" class="modal-content col-lg-6">
-    <div class="modal-body">
+{{> header}}
 
-        <p>Food id: {{data.objectId}}</p>
-        <p>Food name: {{data.foodName}}</p>
-        <p>Calories: {{data.calories}}</p>
-
-        <p>Is you owner: {{isOwner}}</p>
-
-        <img src="{{data.picture}}" alt="" style="width: 90%">
-        <a href="#/object/delete/{{data.objectId}}">Delete</a>
+<div id="detailsMovie">
+    <h1>Details</h1>
+    <div class="movie">
+        <h2>Title: Us (2019)</h2>
+        <img
+                src="https://m.media-amazon.com/images/M/MV5BZTliNWJhM2YtNDc1MC00YTk1LWE2MGYtZmE4M2Y5ODdlNzQzXkEyXkFqcGdeQXVyMzY0MTE3NzU@._V1_UX140_CR0,0,140,209_AL_.jpg">
+        <p>A family's serenity turns to chaos when a group of doppelgängers begins to terrorize them.</p>
+        <h2>Genres</h2>
+        <ul class="genres">
+            <li>Horror,Triller</li>
+        </ul>
+        <p>Available Tickets: 50</p>
+        <button><a href="#">Buy Ticket</a></button>
     </div>
 </div>
 
-{{>footer}}
+{{> footer}}

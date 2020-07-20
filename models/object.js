@@ -1,11 +1,10 @@
 const backendlessUrl = (function (applicationId, restApiKey, tableName) {
     return `https://api.backendless.com/${applicationId}/${restApiKey}/data/${tableName}`;
-})('B4A5D2C9-54C2-D965-FF4D-2E1C86495E00', 'C549A5F2-6C9E-4B0A-B6BC-1046C434D8BF', 'foods');
+})('B4A5D2C9-54C2-D965-FF4D-2E1C86495E00', '86D1644C-D1E2-441A-93B8-160A31079163', 'movies');
 
-const userToken = localStorage.getItem('user-token');
 export default {
     create(object) {
-        console.log(userToken);
+        const userToken = localStorage.getItem('user-token');
         return fetch(backendlessUrl, {
             method: 'post', headers: { 'Content-type': 'application/json', 'user-token': userToken }, body: JSON.stringify(object)
         }).
@@ -32,5 +31,18 @@ export default {
             },
             body: JSON.stringify(data)
         })
+    },
+
+    //get all posts in collection and return filtered by owner
+    getAllObjectByOwner(ownerId){
+        const array = [];
+        return this.getAll().then(function (data) {
+            data.forEach(obj => {
+                if(obj.ownerId === ownerId){
+                    array.push(obj);
+                }
+            });
+            return Promise.resolve(array);
+        });
     }
 };

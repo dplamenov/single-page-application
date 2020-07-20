@@ -1,27 +1,15 @@
-<!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-        <a class="navbar-brand" href="#/home">DonUni</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                {{#if isLoggedIn}}
-                <li class="nav-item">
-                    <a class="nav-link" href="#/cause/dashboard">$$$$$$$$$$$$$$$$$$$</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#/user/logout">Logout ({{email}})</a>
-                </li>
-                {{else}}
-                <li class="nav-item">
-                    <a class="nav-link" href="#/user/login">Login</a>
-                </li>
-                {{/if}}
-            </ul>
-        </div>
-    </div>
+<nav>
+    <ul>
+        {{#if isLoggedIn}}
+            <li><a href="#/cinema">Cinema</a></li>
+            <li><a href="#/movie/create">Add Movie</a></li>
+            <li><a href="#/movie/my">My Movies</a></li>
+            <li class="right">Welcome, user!</li>
+            <li class="right"><a href="#/logout">Logout</a></li>
+        {{else}}
+            <li><a href="#/home">Home</a></li>
+            <li class="right"><a href="#/register">Register</a></li>
+            <li class="right"><a href="#/login">Login</a></li>
+        {{/if}}
+    </ul>
 </nav>
-<!-- ./Navigation -->
