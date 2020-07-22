@@ -23,6 +23,8 @@ const app = new Sammy('#root', function () {
     this.post('#/object/update/:id', controllers.object.put.update); // store newly created specific object
     this.get('#/object/delete/:id', controllers.object.delete.delete); // delete object by id
 
+    this.get('#/object/:id/ticket', controllers.object.put.ticketBuy);
+    this.get('#/user/object', controllers.object.get.objectsByUsers);
 
 });
 

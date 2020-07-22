@@ -1,5 +1,6 @@
 import user from '../models/user.js';
 import extend from "../context.js";
+import * as notify from "../notify.js";
 
 export default {
     get: {
@@ -18,6 +19,7 @@ export default {
                 const token = sessionStorage.getItem('user-token');
                 user.logout(token).then((response) => {
                     sessionStorage.clear();
+                    notify.showInfo('logout');
                     context.redirect('#/home');
                 });
             });

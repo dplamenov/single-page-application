@@ -4,7 +4,7 @@ const backendlessUrl = (function (applicationId, restApiKey, tableName) {
 
 export default {
     create(object) {
-        const userToken = localStorage.getItem('user-token');
+        const userToken = sessionStorage.getItem('user-token');
         return fetch(backendlessUrl, {
             method: 'post', headers: { 'Content-type': 'application/json', 'user-token': userToken }, body: JSON.stringify(object)
         }).
@@ -42,6 +42,9 @@ export default {
                     array.push(obj);
                 }
             });
+
+            console.log(data);
+            console.log(array);
             return Promise.resolve(array);
         });
     }
